@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Ingreso | Urbanova</title>
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/2332/2332407.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #009688, #004d40); /* Degradado verde-azul */
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            text-align: left;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        /* Título Urbanova */
+        .urbanova-title {
+            font-size: 2em;
+            font-weight: bold;
+            color: #fff;
+            background-color: rgba(0, 47, 108, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Encabezado del formulario */
+        header {
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #ffcc00;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 1.1em;
+        }
+
+        /* Estilo de los botones */
+        .btn-primary {
+            background-color: #ffcc00;
+            border: none;
+            font-weight: bold;
+            padding: 12px;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background-color: #e6b800;
+        }
+
+        /* Enlaces debajo del formulario */
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .register-link a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1em;
+            display: block;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Estilo de mensaje de error */
+        .error-message {
+            color: #f44336;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        /* Estilo del fondo */
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.example.com/path-to-bus-image.jpg'); /* Imagen de buses */
+            background-size: cover;
+            background-position: center;
+            opacity: 0.6;
+            z-index: -1;
+        }
+
+        /* Media Queries para pantallas pequeñas */
+        @media (max-width: 767px) {
+            .container {
+                max-width: 90%;
+                padding: 20px;
+            }
+
+            .urbanova-title {
+                font-size: 1.6em;
+            }
+
+            header {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background"></div>
+    <div class="container" id="loginForm">
+        <div class="urbanova-title">Urbanova</div>
+        <header><i class="fas fa-bus"></i> Portal de Ingreso</header>
+        <hr>
+        <form action="/usuarios/ingresar" method="post">
+            <div class="form-group">
+                <label for="correo"><i class="fas fa-envelope"></i> Correo:</label>
+                <input type="text" id="correo" name="correo" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="clave"><i class="fas fa-lock"></i> Contraseña:</label>
+                <input type="password" id="clave" name="clave" class="form-control" required>
+            </div>
+
+            <div class="form-buttons">
+                <input type="submit" value="Iniciar Sesión" class="btn btn-primary">
+            </div>
+        </form>
+        <div class="error-message" th:if="${error}">[[${error}]]</div>
+        <div class="register-link">
+            <a href="/usuarios/registro">¿No tienes una cuenta? Regístrate aquí.</a>
+            <a href="/usuarios/cambiar-contrasena">¿Olvidaste tu contraseña?</a>
+        </div>
+    </div>
+</body>
+
+</html>

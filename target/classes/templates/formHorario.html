@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Horario</title>
+	<link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/2332/2332407.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #e3f2fd, #f0f4fd);
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00509e;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            color: #fff;
+            background: #00509e;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background 0.3s;
+        }
+
+        .btn-back:hover {
+            background: #003f80;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form label {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        form input,
+        form select {
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        form button {
+            margin-top: 20px;
+            padding: 12px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #00509e;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: bold;
+        }
+
+        form button:hover {
+            background-color: #003f80;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="/horarios" class="btn-back">⬅ Regresar</a>
+        <h1 th:text="${#strings.isEmpty(horario.id) ? 'Crear Horario' : 'Editar Horario'}"></h1>
+        <form th:action="@{/horarios/guardar}" th:object="${horario}" method="post">
+            <!-- Si el objeto Horario ya tiene un ID, lo incluimos de manera oculta -->
+            <input type="hidden" th:if="${horario.id != null}" th:field="*{id}" th:value="${horario.id}" />
+            
+            <!-- Campo para seleccionar la ruta -->
+            <label for="ruta">Ruta</label>
+            <!-- Cambiamos el th:field a *{ruta.id} para enviar solo el ID de la ruta -->
+            <select id="ruta" name="ruta" th:field="*{ruta.id}" required>
+                <option value="" disabled selected>Seleccione una ruta</option>
+                <!-- Recorremos las rutas disponibles -->
+                <option th:each="ruta : ${rutas}" th:value="${ruta.id}" th:text="${ruta.nombre}"></option>
+            </select>
+
+            <!-- Campo para la hora de salida -->
+            <label for="horaSalida">Hora de Salida</label>
+            <input type="time" id="horaSalida" name="horaSalida" th:field="*{horaSalida}" required>
+
+            <!-- Campo para la hora de llegada -->
+            <label for="horaLlegada">Hora de Llegada</label>
+            <input type="time" id="horaLlegada" name="horaLlegada" th:field="*{horaLlegada}" required>
+
+            <!-- Botón para guardar -->
+            <button type="submit">Guardar</button>
+        </form>
+    </div>
+</body>
+
+</html>

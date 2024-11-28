@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.ProyectoDeportes.app.ProyectoDeportesApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.950 s -- in com.ProyectoDeportes.app.ProyectoDeportesApplicationTests

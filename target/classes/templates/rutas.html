@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rutas - Urbanova</title>
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/2332/2332407.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+</head>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #e3f2fd, #f0f4fd);
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        text-align: center;
+        color: #00509e;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 20px 0;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 30px auto;
+        padding: 20px;
+        background: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-back {
+        display: inline-block;
+        margin-bottom: 20px;
+        text-decoration: none;
+        font-size: 14px;
+        color: #fff;
+        background: #00509e;
+        padding: 10px 20px;
+        border-radius: 50px;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: background 0.3s;
+    }
+
+    .btn-back:hover {
+        background: #003f80;
+    }
+
+    .btn-create {
+        display: inline-block;
+        margin-bottom: 20px;
+        text-decoration: none;
+        font-size: 14px;
+        color: #fff;
+        background: #00796b;
+        padding: 10px 20px;
+        border-radius: 50px;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: background 0.3s;
+    }
+
+    .btn-create:hover {
+        background: #00574b;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 10px; /* Espaciado entre filas */
+        font-size: 1rem;
+    }
+
+    thead th {
+        background: #00509e;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        border-radius: 10px 10px 0 0;
+    }
+
+    tbody tr {
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    tbody td {
+        padding: 15px;
+        text-align: center;
+    }
+
+    tbody td:first-child {
+        border-radius: 10px 0 0 10px;
+    }
+
+    tbody td:last-child {
+        border-radius: 0 10px 10px 0;
+    }
+
+    .btn {
+        text-decoration: none;
+        font-size: 14px;
+        color: #fff;
+        padding: 8px 15px;
+        border-radius: 50px;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+
+    .btn-edit {
+        background: #00796b;
+    }
+
+    .btn-edit:hover {
+        background: #00574b;
+    }
+
+    .btn-delete {
+        background: #e63946;
+    }
+
+    .btn-delete:hover {
+        background: #b71c1c;
+    }
+</style>
+<body>
+    <div class="container">
+        <a href="/index" class="btn-back">⬅ Regresar</a>
+        <h1>Rutas 🚌</h1>
+        <a href="/rutas/crear" class="btn-create">✚ Crear Nueva Ruta</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Esta parte mostrará las rutas dinámicamente -->
+                <tr th:each="ruta : ${rutas}">
+                    <td th:text="${ruta.nombre}">Nombre de la Ruta</td>
+                    <td th:text="${ruta.descripcion}">Descripción de la ruta</td>
+                    <td>
+                        <!-- Enlace para editar y eliminar -->
+                        <a th:href="@{/rutas/editar/{id}(id=${ruta.id})}" class="btn btn-edit">✏ Editar</a>
+                        <a th:href="@{/rutas/eliminar/{id}(id=${ruta.id})}" class="btn btn-delete">🗑 Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
