@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Promoción</title>
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/2332/2332407.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #e3f2fd, #f0f4fd);
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00509e;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            color: #fff;
+            background: #00509e;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background 0.3s;
+        }
+
+        .btn-back:hover {
+            background: #003f80;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form label {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        form input,
+        form textarea {
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        form button {
+            margin-top: 20px;
+            padding: 12px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #00509e;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: bold;
+        }
+
+        form button:hover {
+            background-color: #003f80;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Button to go back -->
+        <a href="/promociones" class="btn-back">⬅ Regresar</a>
+
+        <!-- Title dynamic based on whether editing or creating -->
+        <h1 th:text="${#strings.isEmpty(promocion.id) ? 'Nueva Promoción' : 'Editar Promoción'}"></h1>
+
+        <!-- Form to submit promotion -->
+        <form th:action="@{/promociones/guardar}" th:object="${promocion}" method="post">
+            
+            <!-- Hidden field for existing promotion ID if available -->
+            <input type="hidden" th:if="${promocion.id != null}" th:field="*{id}" />
+
+            <!-- Promotion Title input -->
+            <label for="titulo">Título</label>
+            <input type="text" id="titulo" name="titulo" th:field="*{titulo}" required />
+
+            <!-- Promotion Description textarea -->
+            <label for="descripcion">Descripción</label>
+            <textarea id="descripcion" name="descripcion" th:field="*{descripcion}" rows="4" required></textarea>
+
+            <!-- Start Date input -->
+            <label for="fechaInicio">Fecha de Inicio</label>
+            <input type="date" id="fechaInicio" name="fechaInicio" th:field="*{fechaInicio}" required />
+
+            <!-- End Date input -->
+            <label for="fechaFin">Fecha de Fin</label>
+            <input type="date" id="fechaFin" name="fechaFin" th:field="*{fechaFin}" required />
+
+            <!-- Submit button -->
+            <button type="submit">Guardar</button>
+        </form>
+    </div>
+</body>
+
+</html>

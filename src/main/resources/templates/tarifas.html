@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarifas - Urbanova</title>
+	<link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/2332/2332407.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+</head>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #e3f2fd, #f0f4fd);
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        text-align: center;
+        color: #00509e;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 20px 0;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 30px auto;
+        padding: 20px;
+        background: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-back {
+        display: inline-block;
+        margin-bottom: 20px;
+        text-decoration: none;
+        font-size: 14px;
+        color: #fff;
+        background: #00509e;
+        padding: 10px 20px;
+        border-radius: 50px;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: background 0.3s;
+    }
+
+    .btn-back:hover {
+        background: #003f80;
+    }
+
+    .btn-create {
+        display: inline-block;
+        margin-bottom: 20px;
+        text-decoration: none;
+        font-size: 14px;
+        color: #fff;
+        background: #00796b;
+        padding: 10px 20px;
+        border-radius: 50px;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: background 0.3s;
+    }
+
+    .btn-create:hover {
+        background: #00574b;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 10px; /* Espaciado entre filas */
+        font-size: 1rem;
+    }
+
+    thead th {
+        background: #00509e;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        border-radius: 10px 10px 0 0;
+    }
+
+    tbody tr {
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    tbody td {
+        padding: 15px;
+        text-align: center;
+    }
+
+    tbody td:first-child {
+        border-radius: 10px 0 0 10px;
+    }
+
+    tbody td:last-child {
+        border-radius: 0 10px 10px 0;
+    }
+
+    .btn {
+        text-decoration: none;
+        font-size: 14px;
+        color: #fff;
+        padding: 8px 15px;
+        border-radius: 50px;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+
+    .btn-edit {
+        background: #00796b;
+    }
+
+    .btn-edit:hover {
+        background: #00574b;
+    }
+
+    .btn-delete {
+        background: #e63946;
+    }
+
+    .btn-delete:hover {
+        background: #b71c1c;
+    }
+</style>
+<body>
+    <div class="container">
+        <a href="/index" class="btn-back">⬅ Regresar</a>
+        <h1>Tarifas 💸</h1>
+        <a href="/formTarifas" class="btn-create">✚ Crear Nueva Tarifa</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Ruta</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Esta parte mostrará las tarifas dinámicamente -->
+                <tr th:each="tarifa : ${tarifas}">
+                    <td th:text="${tarifa.rutaNombre}">Ruta</td>
+                    <td th:text="${tarifa.precio}">Precio</td>
+                    <td>
+                        <!-- Enlaces para editar y eliminar -->
+                        <a th:href="@{/tarifas/editar/{id}(id=${tarifa.id})}" class="btn btn-edit">✏ Editar</a>
+                        <a th:href="@{/tarifas/eliminar/{id}(id=${tarifa.id})}" class="btn btn-delete" 
+                           onclick="return confirm('¿Estás seguro de eliminar esta tarifa?')">🗑 Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
